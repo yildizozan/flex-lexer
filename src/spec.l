@@ -1,4 +1,3 @@
-
 // Definition Section has one variable 
 // which can be accessed inside yylex()  
 // and main()
@@ -11,31 +10,24 @@ int count = 0;
 // matches with any character except newline and  
 // third rule does not take input after the enter
 %% 
-[A-Z] {printf("%s capital letter\n", yytext); 
-       count++;} 
-.     {printf("%s not a capital letter\n", yytext);} 
-\n    {return 0;} 
+[A-Z] { printf("%s capital letter\n", yytext); count++; }
+.     { printf("%s not a capital letter\n", yytext); }
+\n    { return 0; }
 %% 
-  
-// Code Section prints the number of capital letter present in the given input
-int yywrap(){} 
-int main(int argc, char *argv[]) {
-  
+
 // Explanation: 
 // yywrap() - wraps the above rule section 
 // yyin - takes the file pointer  which contains the input
 // yylex() - this is the main flex function which runs the Rule Section
 // yytext is the text in the buffer 
+int yywrap(){} 
+int main(int argc, char *argv[]) {
+    FILE *fp; 
+    fp = fopen(argv[1],"r"); 
+    yyin = fp; 
   
-// Uncomment the lines below  
-// to take input from file 
-      FILE *fp; 
-      fp = fopen(argv[1],"r"); 
-      yyin = fp; 
+    yylex(); 
+    printf("\nNumber of Captial letters in the given input - %d\n", count); 
   
-yylex(); 
-printf("\nNumber of Captial letters " 
-      "in the given input - %d\n", count); 
-  
-return 0; 
+    return 0; 
 } 
