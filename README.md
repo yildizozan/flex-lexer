@@ -2,7 +2,7 @@
 Simple Lexer Flex Example
 
 Need to install Flex
-```bash
+```shell
 sudo apt-get update
 sudo apt-get install flex
 ```
